@@ -1,1 +1,79 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STS Exam Prep — Practice Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--ink:#1c2b26;
+--paper:#f4efe1;
+--paper-dim:#ece4cf;
+--forest:#1f3a34;
+--forest-deep:#152a25;
+--amber:#d98e2b;
+--amber-deep:#b6721a;
+--teal:#3f8a7c;
+--coral:#c0473a;
+--line: rgba(28,43,38,0.18);
+--shadow: 0 10px 30px rgba(21,42,37,0.18);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+background: var(--forest-deep);
+background-image:
+radial-gradient(circle at 15% 10%, rgba(63,138,124,0.25), transparent 45%),
+radial-gradient(circle at 85% 90%, rgba(217,142,43,0.15), transparent 40%);
+color: var(--ink);
+font-family: 'Inter', sans-serif;
+min-height: 100vh;
+display:flex;
+align-items:flex-start;
+justify-content:center;
+padding: 32px 16px 64px;
+}
+.app{
+width:100%;
+max-width: 760px;
+}
+.brandbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+color: var(--paper);
+margin-bottom: 18px;
+padding: 0 4px;
+}
+.brandbar .mark{
+font-family:'Fraunces', serif;
+font-weight:700;
+font-size:15px;
+letter-spacing:0.02em;
+opacity:0.92;
+}
+.brandbar .mark span{ color: var(--amber); }
+.brandbar .who{
+font-family:'IBM Plex Mono', monospace;
+font-size:12px;
+opacity:0.75;
+}
+.sheet{
+background: var(--paper);
+border-radius: 18px;
+box-shadow: var(--shadow);
+border: 1px solid rgba(0,0,0,0.06);
+position: relative;
+overflow:hidden;
+}
+.sheet::before{
+content:"";
+position:absolute; top:0; left:0; right:0; height:8px;
+background: repeating-linear-gradient(90deg, var(--forest) 0 22px, var(--amber) 22px 26px, var(--forest) 26px 48px);
+opacity:0.9;
+}
+.sheet-inner{ padding: 40px 36px 34px; }
+@media (max-width:600px){ .sheet-inner{ padding: 28px 20px 26px; } }
