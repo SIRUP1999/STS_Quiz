@@ -3,733 +3,483 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STS Exam Prep — Practice Quiz</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>STS Exam Practice — UENR 202</title>
 <style>
-:root{
-  --ink:#1c2b26;
-  --paper:#f4efe1;
-  --paper-dim:#ece4cf;
-  --forest:#1f3a34;
-  --forest-deep:#152a25;
-  --amber:#d98e2b;
-  --amber-deep:#b6721a;
-  --teal:#3f8a7c;
-  --coral:#c0473a;
-  --line: rgba(28,43,38,0.18);
-  --shadow: 0 10px 30px rgba(21,42,37,0.18);
-}
-*{box-sizing:border-box;}
-html,body{margin:0;padding:0;}
-body{
-  background: var(--forest-deep);
-  background-image:
-    radial-gradient(circle at 15% 10%, rgba(63,138,124,0.25), transparent 45%),
-    radial-gradient(circle at 85% 90%, rgba(217,142,43,0.15), transparent 40%);
-  color: var(--ink);
-  font-family: 'Inter', sans-serif;
-  min-height: 100vh;
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  padding: 32px 16px 64px;
-}
-.app{
-  width:100%;
-  max-width: 760px;
-}
-.brandbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  color: var(--paper);
-  margin-bottom: 18px;
-  padding: 0 4px;
-}
-.brandbar .mark{
-  font-family:'Fraunces', serif;
-  font-weight:700;
-  font-size:15px;
-  letter-spacing:0.02em;
-  opacity:0.92;
-}
-.brandbar .mark span{ color: var(--amber); }
-.brandbar .who{
-  font-family:'IBM Plex Mono', monospace;
-  font-size:12px;
-  opacity:0.75;
-}
-.sheet{
-  background: var(--paper);
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(0,0,0,0.06);
-  position: relative;
-  overflow:hidden;
-}
-.sheet::before{
-  content:"";
-  position:absolute; top:0; left:0; right:0; height:8px;
-  background: repeating-linear-gradient(90deg, var(--forest) 0 22px, var(--amber) 22px 26px, var(--forest) 26px 48px);
-  opacity:0.9;
-}
-.sheet-inner{ padding: 40px 36px 34px; }
-@media (max-width:600px){ .sheet-inner{ padding: 28px 20px 26px; } }
-
-.eyebrow{
-  font-family:'IBM Plex Mono', monospace;
-  font-size:11.5px;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color: var(--teal);
-  font-weight:600;
-  margin-bottom:10px;
-}
-h1.title{
-  font-family:'Fraunces', serif;
-  font-weight:900;
-  font-size: 32px;
-  line-height:1.12;
-  margin: 0 0 10px;
-  color: var(--forest-deep);
-}
-p.lede{
-  font-size:15px;
-  line-height:1.6;
-  color: rgba(28,43,38,0.75);
-  margin: 0 0 26px;
-  max-width: 46ch;
-}
-
-/* -------- Name entry -------- */
-.field-label{
-  font-family:'IBM Plex Mono', monospace;
-  font-size:11.5px;
-  text-transform:uppercase;
-  letter-spacing:0.08em;
-  color: var(--forest);
-  display:block;
-  margin-bottom:8px;
-}
-input.textfield{
-  width:100%;
-  font-family:'Fraunces', serif;
-  font-size:22px;
-  padding: 14px 16px;
-  border-radius:10px;
-  border: 1.5px solid var(--line);
-  background: #fffdf7;
-  color: var(--forest-deep);
-  outline:none;
-  transition: border-color .15s ease, box-shadow .15s ease;
-}
-input.textfield:focus{ border-color: var(--amber); box-shadow: 0 0 0 4px rgba(217,142,43,0.15); }
-
-.btn{
-  font-family:'Inter',sans-serif;
-  font-weight:600;
-  font-size:14.5px;
-  border:none;
-  cursor:pointer;
-  border-radius: 999px;
-  padding: 13px 26px;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  transition: transform .12s ease, box-shadow .12s ease, background .15s ease;
-}
-.btn:active{ transform: scale(0.97); }
-.btn-primary{ background: var(--forest); color: var(--paper); box-shadow: 0 6px 16px rgba(31,58,52,0.35); }
-.btn-primary:hover{ background: var(--forest-deep); }
-.btn-amber{ background: var(--amber); color: var(--forest-deep); box-shadow: 0 6px 16px rgba(217,142,43,0.35); }
-.btn-amber:hover{ background: var(--amber-deep); }
-.btn-ghost{ background: transparent; color: var(--forest); border: 1.5px solid var(--line); }
-.btn-ghost:hover{ background: rgba(31,58,52,0.06); }
-.btn:disabled{ opacity:0.45; cursor:not-allowed; }
-.btn-row{ margin-top: 22px; display:flex; gap:10px; flex-wrap:wrap; }
-
-/* -------- Menu -------- */
-.welcome-row{
-  display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;
-  margin-bottom: 4px;
-}
-.welcome-row .who-name{ color: var(--amber-deep); }
-.changer{
-  font-family:'IBM Plex Mono', monospace;
-  font-size:11.5px;
-  color: var(--teal);
-  background:none; border:none; cursor:pointer; text-decoration:underline;
-  padding:0;
-}
-.slide-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:14px; margin-top: 22px; }
-.slide-card{
-  display:flex; flex-direction:column;
-  background:#fffdf7;
-  border:1.5px solid var(--line);
-  border-radius:14px;
-  padding: 18px;
-  text-align:left;
-  transition: border-color .15s ease, transform .12s ease, box-shadow .15s ease;
-  min-height: 190px;
-  cursor: pointer;
-}
-.slide-card:hover{ border-color: var(--amber); transform: translateY(-2px); box-shadow: 0 8px 18px rgba(31,58,52,0.12); }
-.card-top{ display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
-.card-badge{
-  font-family:'IBM Plex Mono', monospace; font-size:10.5px; font-weight:600;
-  text-transform:uppercase; letter-spacing:0.08em; color: var(--teal);
-}
-.card-best-badge{
-  font-family:'IBM Plex Mono', monospace; font-size:10.5px; font-weight:600; color: var(--amber-deep);
-  background: rgba(217,142,43,0.14); padding:3px 9px; border-radius:999px; white-space:nowrap;
-}
-.card-title{ font-family:'Fraunces', serif; font-weight:700; font-size:18px; color: var(--forest-deep); margin-bottom:6px; line-height:1.25; }
-.card-sub{ font-size:12.5px; line-height:1.5; color: rgba(28,43,38,0.65); flex:1; margin-bottom:12px; }
-.card-tags{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
-.card-tag{ font-family:'IBM Plex Mono', monospace; font-size:10px; font-weight:600; padding:2px 8px; border-radius:999px; }
-.card-tag.pass{ background: rgba(63,138,124,0.15); color: var(--teal); }
-.card-tag.progress{ background: rgba(192,71,58,0.12); color: var(--coral); }
-.card-actions{ display:flex; flex-direction:column; gap:8px; margin-top:auto; }
-.card-actions .btn{ width:100%; justify-content:center; padding:10px 16px; font-size:13.5px; }
-.card-link{
-  font-family:'IBM Plex Mono', monospace; font-size:11.5px; color: var(--teal);
-  text-decoration:underline; background:none; border:none; cursor:pointer; text-align:center; padding:2px;
-}
-
-/* -------- Quiz -------- */
-.quiz-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 18px; gap:12px; }
-.quiz-head .back{ background:none; border:none; cursor:pointer; font-family:'IBM Plex Mono', monospace; font-size:12px; color: var(--teal); padding:0; }
-.progress-wrap{ flex:1; height:6px; background: var(--paper-dim); border-radius:4px; overflow:hidden; margin: 0 14px; }
-.progress-bar{ height:100%; background: var(--amber); border-radius:4px; transition: width .2s ease; }
-.qcount{ font-family:'IBM Plex Mono', monospace; font-size:12px; color: var(--forest); flex:none; }
-
-.qnum{ font-family:'IBM Plex Mono', monospace; font-size:12px; color: var(--teal); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; }
-.qtext{ font-family:'Fraunces', serif; font-weight:700; font-size:21px; line-height:1.35; color: var(--forest-deep); margin-bottom:22px; }
-
-.options{ display:flex; flex-direction:column; gap:10px; }
-.option{
-  display:flex; align-items:flex-start; gap:14px;
-  border:1.5px solid var(--line); border-radius:12px;
-  padding: 14px 16px;
-  cursor:pointer;
-  background:#fffdf7;
-  transition: border-color .12s ease, background .12s ease;
-}
-.option:hover{ border-color: var(--teal); }
-.option.selected{ border-color: var(--forest); background: rgba(31,58,52,0.06); }
-.bubble{
-  font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:13px;
-  width:28px; height:28px; flex:none; border-radius:50%;
-  border: 1.5px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-  color: var(--forest);
-  background:#fff;
-}
-.option.selected .bubble{ background: var(--forest); border-color: var(--forest); color: var(--paper); }
-.opt-text{ font-size:14.5px; line-height:1.5; padding-top:3px; color: var(--ink); }
-
-/* review states */
-.option.correct-answer{ border-color: var(--teal); background: rgba(63,138,124,0.10); }
-.option.correct-answer .bubble{ background: var(--teal); border-color: var(--teal); color:#fff; }
-.option.wrong-answer{ border-color: var(--coral); background: rgba(192,71,58,0.08); }
-.option.wrong-answer .bubble{ background: var(--coral); border-color: var(--coral); color:#fff; }
-.explain{
-  margin-top:10px; font-size:13.5px; line-height:1.55; color: rgba(28,43,38,0.8);
-  background: var(--paper-dim); border-left:3px solid var(--amber);
-  padding: 10px 14px; border-radius: 0 8px 8px 0;
-}
-
-/* -------- Results -------- */
-.score-hero{ text-align:center; padding: 10px 0 20px; }
-.score-num{ font-family:'Fraunces', serif; font-weight:900; font-size:64px; color: var(--forest-deep); line-height:1; }
-.score-num span{ font-size:28px; color: rgba(28,43,38,0.5); }
-.score-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color: var(--teal); margin-top:8px; }
-.stamp{
-  display:inline-block; margin-top:14px; padding: 6px 16px; border-radius:999px;
-  font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:12px;
-  border: 1.5px dashed var(--amber-deep); color: var(--amber-deep); transform: rotate(-2deg);
-}
-.review-list{ display:flex; flex-direction:column; gap:16px; margin-top: 8px; }
-.review-item{ border:1.5px solid var(--line); border-radius:12px; padding:16px 18px; background:#fffdf7; }
-.review-item .qtext{ font-size:16px; margin-bottom:14px; }
-.review-item .tag{
-  font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.08em;
-  padding:2px 8px; border-radius:6px; margin-left:8px;
-}
-.tag.ok{ background: rgba(63,138,124,0.15); color: var(--teal); }
-.tag.no{ background: rgba(192,71,58,0.15); color: var(--coral); }
-
-/* -------- My Attempts -------- */
-.lb-row{
-  display:flex; align-items:center; gap:12px;
-  padding: 10px 4px; border-bottom: 1px solid var(--line);
-  font-size:14px;
-}
-.lb-row:last-child{ border-bottom:none; }
-.lb-rank{ font-family:'IBM Plex Mono', monospace; font-weight:600; color: var(--teal); width:26px; }
-.lb-name{ flex:1; font-weight:600; color: var(--forest-deep); }
-.lb-score{ font-family:'IBM Plex Mono', monospace; color: var(--amber-deep); font-weight:600; }
-.lb-empty{ font-size:13.5px; color: rgba(28,43,38,0.55); padding: 10px 4px; }
-
-.section-title{ font-family:'Fraunces', serif; font-weight:700; font-size:17px; color: var(--forest-deep); margin: 26px 0 6px; }
-.hint{ font-size:12.5px; color: rgba(28,43,38,0.55); margin-bottom:14px; }
+  :root{
+    --paper:#F5EFDD;
+    --card:#FFFFFF;
+    --ink:#20293A;
+    --ink-soft:#5B6472;
+    --accent:#B9822E;
+    --accent-deep:#8C6220;
+    --correct:#2F6F4E;
+    --correct-bg:#E7F1EA;
+    --incorrect:#A63D2F;
+    --incorrect-bg:#F6E7E3;
+    --line:#DCD2B8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 60px;
+  }
+  .app{width:100%;max-width:640px;}
+  h1,h2,h3{font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;margin:0;}
+  .brand{
+    display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:10px;margin-bottom:22px;
+  }
+  .brand h1{font-size:23px;letter-spacing:0.2px;}
+  .brand span{font-size:12.5px;color:var(--ink-soft);}
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:22px 20px;
+    margin-bottom:16px;
+  }
+  /* ---- Home screen ---- */
+  .stats-row{display:flex;gap:10px;margin-bottom:18px;}
+  .stat{flex:1;text-align:center;padding:12px 6px;border:1px solid var(--line);border-radius:6px;background:var(--card);}
+  .stat .num{font-family:Georgia,serif;font-size:22px;font-weight:700;color:var(--accent-deep);}
+  .stat .lbl{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+  .mode-btn{
+    width:100%;text-align:left;
+    display:flex;align-items:center;gap:14px;
+    background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:16px 18px;margin-bottom:10px;cursor:pointer;
+    font-family:inherit;color:var(--ink);
+  }
+  .mode-btn:hover{border-color:var(--accent);}
+  .mode-btn .tag{
+    font-family:Georgia,serif;font-weight:700;font-size:15px;
+    border:1px solid var(--ink);border-radius:4px;
+    width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    color:var(--ink);
+  }
+  .mode-btn .txt strong{display:block;font-size:15px;margin-bottom:2px;}
+  .mode-btn .txt span{font-size:12.5px;color:var(--ink-soft);}
+  .history{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-top:14px;}
+  /* ---- Quiz screen ---- */
+  .progress-wrap{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:13px;color:var(--ink-soft);}
+  .ticks{display:flex;gap:3px;margin-bottom:20px;flex-wrap:wrap;}
+  .tick{height:5px;flex:1;min-width:4px;background:var(--line);border-radius:2px;}
+  .tick.done{background:var(--accent);}
+  .qprompt{font-size:17px;line-height:1.45;margin-bottom:18px;}
+  .opt{
+    display:flex;align-items:flex-start;gap:12px;
+    width:100%;text-align:left;
+    background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:12px 14px;margin-bottom:9px;cursor:pointer;font-family:inherit;font-size:14.5px;color:var(--ink);
+    line-height:1.4;
+  }
+  .opt:hover{border-color:var(--accent);}
+  .opt .letter{
+    font-family:Georgia,serif;font-weight:700;font-size:13px;
+    border:1px solid var(--ink-soft);border-radius:4px;
+    width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  }
+  .opt.selected-correct{background:var(--correct-bg);border-color:var(--correct);}
+  .opt.selected-correct .letter{border-color:var(--correct);color:var(--correct);}
+  .opt.selected-incorrect{background:var(--incorrect-bg);border-color:var(--incorrect);}
+  .opt.selected-incorrect .letter{border-color:var(--incorrect);color:var(--incorrect);}
+  .opt.reveal-correct{border-color:var(--correct);}
+  .opt.locked{cursor:default;}
+  .feedback{margin-top:14px;padding:14px 16px;border-radius:6px;font-size:13.5px;line-height:1.5;}
+  .feedback.good{background:var(--correct-bg);color:var(--correct);}
+  .feedback.bad{background:var(--incorrect-bg);color:var(--incorrect);}
+  .feedback b{display:block;margin-bottom:4px;font-size:13.5px;}
+  .btn{
+    background:var(--ink);color:var(--paper);border:none;border-radius:6px;
+    padding:12px 20px;font-size:14.5px;cursor:pointer;font-family:inherit;font-weight:600;
+  }
+  .btn:disabled{opacity:0.35;cursor:not-allowed;}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink);}
+  .btn-row{display:flex;justify-content:flex-end;gap:10px;margin-top:6px;}
+  /* ---- Results screen ---- */
+  .score-hero{text-align:center;padding:26px 10px;}
+  .score-hero .big{font-family:Georgia,serif;font-size:52px;font-weight:700;color:var(--accent-deep);}
+  .score-hero .pct{font-size:15px;color:var(--ink-soft);margin-top:4px;}
+  .score-msg{font-size:14.5px;text-align:center;margin-top:8px;padding:0 10px;}
+  .review-item{border-top:1px solid var(--line);padding:14px 0;}
+  .review-item:first-child{border-top:none;}
+  .review-item .q{font-size:14px;margin-bottom:6px;}
+  .review-item .ans{font-size:13px;line-height:1.5;}
+  .review-item .ans .you{color:var(--incorrect);}
+  .review-item .ans .right{color:var(--correct);}
+  .review-item .exp{font-size:12.5px;color:var(--ink-soft);margin-top:5px;}
+  .empty-review{font-size:13.5px;color:var(--ink-soft);text-align:center;padding:10px 0;}
+  .section-title{font-size:13px;text-transform:none;color:var(--ink-soft);margin:4px 0 10px;font-weight:600;}
+  .footer-note{font-size:11.5px;color:var(--ink-soft);text-align:center;margin-top:26px;}
+  .loading{text-align:center;padding:30px;color:var(--ink-soft);}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="brandbar">
-    <div class="mark">Albytech <span>&middot;</span> Exam Prep</div>
-    <div class="who" id="brandWho"></div>
-  </div>
-  <div class="sheet"><div class="sheet-inner" id="root"></div></div>
-</div>
+<div class="app" id="app"></div>
 
 <script>
-/* ============================================================
-   QUESTION DATA FROM UENR202_STS_Answers.pdf
-   ============================================================ */
-function q(question, options, correct, explanation){
-  return { question, options, correct, explanation };
-}
-
-const SLIDES = [
-  {
-    id: "lecture1a",
-    order: 1,
-    title: "Lecture 1A",
-    subtitle: "Key Concepts & Definitions of Science and Technology",
-    questions: [
-      q("What does STS stand for in this course?",["Science, Technology and Sustainability","Science, Technology and Society","Systematic Technology Studies","Science, Theory and Society"],1,"STS stands for Science, Technology and Society - a field that examines the interrelationship between these three domains."),
-      q("Which of these best describes STS as a field of study?",["A field that only tests new gadgets before release","An interdisciplinary field studying science, technology, and society interactions","A purely theoretical exercise","Only a business discipline"],1,"STS is an interdisciplinary field that examines how science and technology shape society and vice versa."),
-      q("The historical roots of STS lie in:",["The Renaissance period","Ancient Greek philosophy","The interwar period (1920s-1930s)","Medieval times"],2,"The interwar period saw the emergence of STS as scholars began examining the relationship between science, technology, and society."),
-      q("Who became interested in the relationship between scientific knowledge, technological systems, and society?",["Only government regulators","Historians and sociologists","Only engineers","Only physicists"],1,"Historians, sociologists, and social scientists became key contributors to early STS scholarship."),
-      q("Thomas Kuhn's classic 1962 study that helped shape STS is titled:",["A Brief History of Time","The Origin of Species","The Structure of Scientific Revolutions","The Selfish Gene"],2,"Kuhn's 'The Structure of Scientific Revolutions' fundamentally changed how we understand scientific progress and paradigm shifts."),
-    ]
-  },
-  {
-    id: "lecture1b",
-    order: 2,
-    title: "Lecture 1B",
-    subtitle: "Historical Context of the Development of Science and Technology",
-    questions: [
-      q("What is the overall subject of this set of slides?",["The mathematics of algebra","The historical context of the development of science and technology","Ancient mythology","Modern art history"],1,"This lecture focuses on the historical development of science and technology from ancient times to the modern era."),
-      q("According to the introduction, why is understanding the historical context important?",["It has no real importance","It helps explain key periods and milestones that shaped modern science and technology","It's just trivia","Only for entertainment"],1,"Understanding historical context helps us appreciate how science and technology developed through different periods and civilizations."),
-      q("Which invention is attributed to Mesopotamia?",["Papermaking","The wheel and writing (cuneiform)","Gunpowder","The printing press"],1,"Ancient Mesopotamia is credited with inventing the wheel and developing cuneiform writing."),
-      q("Which achievements are attributed to Ancient Egypt?",["The wheel and cuneiform writing","Pyramids and medicine","Papermaking and gunpowder","Algebra and heliocentric theory"],1,"Ancient Egypt is famous for constructing the pyramids and developing early medical practices."),
-      q("Which achievements are attributed to Ancient China?",["Papermaking and gunpowder","The wheel and cuneiform writing","Pyramids and medicine","Aqueducts and roads"],0,"Ancient China is credited with inventing papermaking and gunpowder."),
-    ]
-  },
-  {
-    id: "lecture3",
-    order: 3,
-    title: "Lecture 3",
-    subtitle: "The First Industrial Revolution and Technological Change",
-    questions: [
-      q("What time period does the lecture assign to the First Industrial Revolution?",["1600–1700","1750–1850","1870–1914","1900–1950"],1,"The First Industrial Revolution occurred from approximately 1750–1850."),
-      q("Alongside the Industrial Revolution, which other transformations does the lecture say marked this era?",["Political revolutions such as the American and French Revolutions, and increased global trade","Only military conflicts","Only religious changes","Only cultural shifts"],0,"The First Industrial Revolution coincided with political revolutions and expanded global trade."),
-      q("The Industrial Revolution is described as a transition from:",["Industrial economies to agrarian economies","Agrarian economies to industrial economies","Digital economies to industrial economies","Hunter-gatherer to agrarian"],1,"The Industrial Revolution marked the shift from agrarian to industrial economies."),
-      q("Which of these is listed as a key factor that led to the Industrial Revolution?",["Efficient agriculture and abundant natural capital","Only technological innovation","Only political stability","Only religious faith"],0,"Efficient agriculture was crucial in providing the capital and workforce needed for industrialization."),
-      q("In the lecture's list of key factors, coal served primarily as:",["A building material for factories","A cheap fuel source for rail transportation of goods and services","A currency for paying workers","Only a decorative material"],1,"Coal was the primary fuel source that powered industrial machinery and transportation during this period."),
-    ]
-  },
-  {
-    id: "lecture4",
-    order: 4,
-    title: "Lecture 4",
-    subtitle: "Technology and Modernization",
-    questions: [
-      q("What is the overall subject of Lecture 4?",["Technology and Modernization","The First Industrial Revolution","Ancient Civilizations","The Scientific Method"],0,"Lecture 4 focuses on how technology drives modernization processes."),
-      q("The lecture illustrates technology's transformative growth using which historical arc?",["From the stone age through the internet, computers, and into the AI period","From AI back to medieval times","From agriculture to manufacturing only","From ancient philosophy to modern art"],0,"The lecture traces technological progress from prehistoric times through modern digital and AI technologies."),
-      q("Access to energy, electricity, sanitation, and clean water has, per the lecture:",["Transformed the lives of billions, especially in less-developed countries","Had no measurable effect on quality of life","Decreased human development","Only affected wealthy nations"],0,"Access to these basic services has dramatically improved living standards globally."),
-      q("Transport, telephones, and the internet have, according to the lecture, allowed people to:",["Collaborate on problems at a global level","Work only within isolated local communities","Avoid international cooperation","Eliminate all communication"],0,"These technologies enable global collaboration and connection."),
-      q("Which is listed as a significant positive contribution of technology to modern society?",["Enhancing efficiency in various aspects of life","Reducing all human interaction to zero","Eliminating the need for education","Increasing poverty"],0,"Technology has significantly enhanced efficiency in work, communication, and daily life."),
-    ]
-  },
-  {
-    id: "lecture5",
-    order: 5,
-    title: "Lecture 5",
-    subtitle: "The Sustainable Development Goals (SDGs)",
-    questions: [
-      q("On what date did the Millennium Summit adopt the Millennium Development Goals?",["1 January 2000","8 September 2000","25 September 2015","20 June 1992"],1,"The Millennium Summit at the UN adopted the MDGs on 8 September 2000."),
-      q("Where did the Millennium Summit take place?",["Geneva, at WHO headquarters","New York, at UN headquarters","Rio de Janeiro","Addis Ababa"],1,"The Millennium Summit took place at the United Nations headquarters in New York."),
-      q("What was the broad vision behind the MDGs?",["To industrialise every economy by 2015","To end poverty in all dimensions","To eliminate all forms of technology","To create a single global currency"],1,"The MDGs aimed to end poverty and improve living conditions globally by 2015."),
-      q("How many Millennium Development Goals (MDGs) were there?",["5","8","12","17"],1,"The MDG framework consisted of 8 Millennium Development Goals."),
-      q("The MDG framework guided development work across the world during which period?",["1990–2000","2000–2015","2015–2030","1980–1990"],1,"The MDGs guided global development work from 2000 to 2015."),
-      q("Which of the following is one of the 8 MDGs?",["Eradicate extreme poverty and hunger","Colonize other planets","End all forms of taxation","Eliminate all national borders"],0,"Eradicating extreme poverty and hunger was the first MDG."),
-      q("Which MDG focused on education?",["Achieve universal primary education","Reduce child mortality","Improve maternal health","Combat HIV/AIDS, malaria and other diseases"],0,"Achieving universal primary education was MDG 2."),
-      q("Which MDG addressed women's empowerment?",["Ensure environmental sustainability","Promote gender equality and empower women","Develop a global partnership for development","Reduce child mortality"],1,"Promoting gender equality and women's empowerment was MDG 3."),
-    ]
-  },
-  {
-    id: "lecture6",
-    order: 6,
-    title: "Lecture 6",
-    subtitle: "Climate Change: Causes, Impacts, and Adaptation Strategies",
-    questions: [
-      q("According to Bulkeley and Betsill (2003), climate change is defined as:",["An increase in mean annual surface temperature due to increased greenhouse gas concentrations","A natural cooling cycle","A temporary weather pattern","Only human activity"],0,"Climate change is primarily defined as increased atmospheric greenhouse gas concentrations causing temperature rise."),
-      q("Which gases are named in the lecture's definition of climate change?",["Carbon dioxide, methane, chlorofluorocarbons, and nitrous oxide","Oxygen, nitrogen, and hydrogen","Helium and neon only","Argon only"],0,"These greenhouse gases trap heat and contribute to climate change."),
-      q("According to the greenhouse effect diagram, greenhouse gases absorb and redirect heat radiated by Earth, which:",["Insulates the Earth from heat loss to space","Sends all heat directly into space","Cools the planet","Causes no temperature change"],0,"Greenhouse gases trap heat, preventing it from escaping to space, causing warming."),
-      q("The lecture states the increase in greenhouse gas concentration is primarily due to:",["Human activities such as fossil fuel combustion, deforestation, and agriculture","Natural cooling of the atmosphere","Solar radiation decreasing","Ocean currents changing"],0,"Human activities are the primary driver of increased greenhouse gas concentrations."),
-      q("Into which two broad categories does the lecture divide the causes of climate change?",["Natural causes and anthropogenic causes","Local causes and global causes","Historical causes and modern causes","Atmospheric and oceanic causes"],0,"Climate change is caused by both natural factors and human (anthropogenic) activities."),
-    ]
-  },
-  {
-    id: "lecture7",
-    order: 7,
-    title: "Lecture 7",
-    subtitle: "Neoliberalism 1: The Washington Consensus",
-    questions: [
-      q("What does neoliberalism refer to, according to the lecture?",["A form of socialist central planning after 1945","A revival of economic liberalism (laissez-faire) taking place since the 1970s","Purely Marxist theory","Ancient economic philosophy"],1,"Neoliberalism is a revival of laissez-faire economic principles that emerged in the late 20th century."),
-      q("Neoliberalism is sometimes also referred to as:",["Neo-Marxism","Post-structuralism","Neoclassical liberalism","Classical conservatism"],2,"Neoliberalism is sometimes called neoclassical liberalism."),
-      q("What does neoliberalism aim to halt, and if possible reverse?",["The spread of democratic elections","The trend towards big government and state intervention in the economy","International cooperation","Education expansion"],1,"Neoliberalism seeks to reduce state intervention and promote market-based solutions."),
-      q("Which scholar is cited (2007) for the definition of 'market fundamentalism' used in the lecture?",["Hayek","Williamson","Heywood","Friedman"],2,"Heywood (2007) is cited for defining market fundamentalism."),
-      q("Per the cited definition, market fundamentalism reflects:",["Skepticism toward all market mechanisms","An absolute faith in the market, holding that it offers solutions to all economic and social problems","Government-only solutions","Only non-profit approaches"],1,"Market fundamentalism represents extreme faith in market mechanisms to solve all problems."),
-    ]
-  },
-  {
-    id: "lecture8",
-    order: 8,
-    title: "Lecture 8",
-    subtitle: "Neoliberalism 2: The African Debt Crisis",
-    questions: [
-      q("Starting in the 1970s, and especially after the fall of the Soviet Union, what did the IMF and World Bank do?",["Synchronized neoliberal interests to integrate and deregulate markets globally","Abandoned all lending activities","Focused only on environmental issues","Only worked with wealthy nations"],0,"The IMF and World Bank promoted neoliberal policies globally after the Cold War."),
-      q("In return for supplying loans to developing countries, what did the IMF and World Bank demand?",["Immediate repayment in gold","Implementation of Structural Adjustment Programmes (SAPs)","Military cooperation","Only religious reforms"],1,"SAPs were required as conditions for receiving IMF and World Bank loans."),
-      q("Why did developing countries need loans from the World Bank?",["Because of the debt crisis around 1980–82","To fund space programs","For entertainment purposes","No legitimate reason"],0,"Many developing nations faced a severe debt crisis starting in 1980-1982."),
-      q("When did the African debt crisis first catch global attention?",["1970","1982","1995","2005"],1,"The African debt crisis became a major global concern in 1982."),
-      q("In 1982, approximately how much did African countries owe private banks and creditors?",["US$14 billion","US$140 billion","US$1.4 billion","US$1.4 trillion"],1,"African debt stood at approximately US$140 billion in 1982."),
-      q("By 1990, how much had Africa's debt ballooned to?",["US$100 billion","US$270 billion","US$500 billion","US$1 trillion"],1,"Africa's debt had grown to approximately US$270 billion by 1990."),
-      q("How does the lecture compare Africa's debt to Latin America's debt?",["Africa's debt is small compared to Latin America's approximately US$500 billion","Africa's debt far exceeds Latin America's","They are exactly equal","There is no comparison possible"],0,"Latin America carried more total debt, with Brazil alone owing US$200 billion."),
-      q("According to the lecture, how much debt does Brazil alone carry?",["US$20 billion","US$200 billion","US$2 billion","US$2 trillion"],1,"Brazil's debt was cited as approximately US$200 billion."),
-    ]
-  }
+/* ---------------- QUESTION BANK (120) ---------------- */
+const BANK = [
+{p:"Deforestation contributes to climate change primarily by...",o:["Reducing the amount of oxygen in the atmosphere","Lowering global sea levels","Decreasing the Earth's ability to sequester carbon dioxide","Increasing rainfall in tropical regions"],c:2,e:"Trees absorb and store CO2. Removing them reduces the planet's carbon sink capacity."},
+{p:"A country has a largely subsistence farming economy, minimal international trade, and limited scientific engagement. Which Rostow stage is this?",o:["Take-off","Traditional society","Preconditions to take-off","Drive to maturity"],c:1,e:"Traditional Society is defined by subsistence agriculture, little trade, pre-scientific production."},
+{p:"A policymaker boosts industrial production but ignores sustainable consumption and environmental protection. Which SDG 'P' is neglected?",o:["People","Planet","Peace","Partnership"],c:1,e:"The 5 P's are People, Planet, Prosperity, Peace, Partnership. Ignoring environment neglects 'Planet'."},
+{p:"Which shows the five time frames of Technology?",o:["Obsolete, current, coexisting, emerging and new","Current, coexisting, obsolete, advanced and emerging","Goal, input, process, output and feedback","Input, process, output, feedback and goal"],c:0,e:"Technology's life cycle: obsolete, current, coexisting, emerging, and new."},
+{p:"A landslide strips away vegetation on a mountainside. How does this contribute to climate change?",o:["By increasing Earth's orbital distance from the Sun","By reducing carbon sequestration capacity of soil and vegetation","By producing more solar radiation","By increasing surface albedo permanently"],c:1,e:"Vegetation and healthy soil store carbon; stripping it reduces the land's ability to absorb CO2."},
+{p:"Who is credited for improving steam power, crucial in the Industrial Revolution?",o:["Richard Arkwright","James Watt","Henry Bessemer","George Stephenson"],c:1,e:"James Watt significantly improved steam engine efficiency, powering factories and machinery."},
+{p:"Which greenhouse gas is most strongly linked to livestock digestion?",o:["Nitrous oxide (N2O)","Methane (CH4)","Sulphur dioxide (SO2)","Carbon dioxide (CO2)"],c:1,e:"Ruminants like cattle produce methane through enteric fermentation."},
+{p:"Which invention is associated with the early textile industry?",o:["Spinning jenny and power loom","Steam engine and Bessemer process","Railways and steamships","Cotton gin and assembly line"],c:0,e:"The spinning jenny and power loom mechanized early textile production."},
+{p:"Which BEST captures neoliberalism's core belief about markets and government?",o:["The market needs constant government intervention to remain fair","Markets are inherently efficient, while governments are prone to inefficiency and overreach","Governments and markets should share equal control over production decisions","Markets are only efficient when state-owned enterprises dominate"],c:1,e:"Neoliberalism holds that free markets allocate resources efficiently, while intervention distorts this."},
+{p:"A fisheries ministry caps catch sizes, protects spawning grounds, and funds ghost-net removal. Which primary SDG is targeted?",o:["Goal 15","Goal 12","Goal 16","Goal 14"],c:3,e:"SDG 14 is 'Life Below Water', covering conservation of oceans and marine resources."},
+{p:"What is the primary purpose of a technological system?",o:["To create more complex systems","To achieve a particular goal or purpose","To eliminate the need for human intervention","To generate random outputs"],c:1,e:"A technological system exists to accomplish a specific, intended goal."},
+{p:"A policymaker claims modern AI is 'unprecedented'. Which historical analogy best helps anticipate AI's challenges/opportunities?",o:["The shift from bronze to iron tools","Faraday's work on electricity","Development of gunpowder in China","Industrial Revolution's mechanization of labour"],c:3,e:"The Industrial Revolution triggered similar labour displacement, productivity gains, and social change."},
+{p:"A city deploys AI for traffic policing. An STS-aligned advisory panel should FIRST do which of the following?",o:["Map stakeholders and co-design governance goals","Approve pilot use if accuracy exceeds 95%","Ask engineers to open-source the code and proceed","Defer to the vendor's ethical guidelines"],c:0,e:"STS prioritizes identifying affected stakeholders and jointly shaping governance before deployment."},
+{p:"The five cardinal themes of the SDGs are...",o:["People, planet, prosperity, peace and partnership","People, planet, production, prosperity and peace","People, peace, planet, partnership and production","Peace, people, prosperity, planet and protection"],c:0,e:"The SDGs are built around the '5 Ps': People, Planet, Prosperity, Peace, and Partnership."},
+{p:"A government invests in wind turbines alongside continued coal energy plants. This is best classified as...",o:["Coexisting technologies","Obsolete technologies","New technologies only","Conflicting technologies"],c:0,e:"An older technology (coal) operating alongside a newer one (wind) is described as coexisting."},
+{p:"Which factor would MOST increase consumer availability in an industrial economy?",o:["Sudden drop in birth rate","Closure of transportation networks","Migration to cities and rising population","Elimination of trade opportunities"],c:2,e:"Urban migration and population growth boost labour force and demand, increasing goods available."},
+{p:"Which scenario best represents 'preconditions to take-off' in Rostow's model?",o:["Emergence of manufacturing and growing international economic connections","Widespread consumer culture and mass production","Economy dominated by manual farming with no manufacturing","Long-term diversification of industries and technologies"],c:0,e:"This stage is marked by early manufacturing and expanding trade links, beyond pure subsistence."},
+{p:"Which scenario shows a natural cause of climate change with a potential COOLING effect?",o:["Expansion of cattle farming in tropical regions","Volcanic eruption releasing ash clouds that block sunlight","Combustion of coal for electricity generation","Deforestation in the Amazon Basin"],c:1,e:"Volcanic ash and aerosols can block sunlight, temporarily cooling the climate."},
+{p:"According to John Locke, under what condition are people obligated to obey civil government?",o:["As long as the government maintains public order","If the government provides economic stability","Only if the government is democratically elected","When the government protects the natural rights of each individual, including private property"],c:3,e:"Locke argued government's legitimacy rests on protecting natural rights — life, liberty, and property."},
+{p:"A factory increases production by burning more coal. Which primary greenhouse gas is released?",o:["Methane (CH4)","Nitrous oxide (N2O)","Carbon dioxide (CO2)","Sulphur dioxide (SO2)"],c:2,e:"Burning coal (a fossil fuel) primarily releases carbon dioxide."},
+{p:"Neoliberal advocates argue that 'the consumer is king' primarily because...",o:["Competition forces producers to meet consumer demand in price and quality","Consumers can vote for policies that benefit them economically","State-owned enterprises respond better to consumer preferences","Governments regulate markets to ensure consumer dominance"],c:0,e:"In free-market theory, competition forces producers to cater to consumer preferences."},
+{p:"Boateng's ecological conservation project has helped Ghana achieve which SDG?",o:["Affordable Energy","Climate Action","Planet","Peace"],c:1,e:"Ecological conservation efforts most directly align with SDG 13: Climate Action."},
+{p:"What does 'adaptation' mean in the context of climate change?",o:["Reducing greenhouse gas emissions to slow climate change","Increasing industrial activities to boost economic growth","Adjusting human and natural systems in response to actual or expected climate effects","Ignoring climate change and continuing current practices"],c:2,e:"Adaptation means adjusting practices/systems in response to actual or expected climate impacts."},
+{p:"The use of flour as medicine (penicillin precursor) in ancient civilization was from:",o:["Egypt","Greece","China","India"],c:0,e:"Ancient Egyptians used mouldy bread and flour-based preparations as early medicinal remedies."},
+{p:"What significant change accompanied urbanization during the Industrial Revolution?",o:["Decrease in city population","Growth in cities and their associated cost of living","The decline of industrial activities","The establishment of rural communities"],c:1,e:"Factories drew workers into cities, swelling urban populations and driving up cost of living."},
+{p:"The global recession of the early 1980s led to a reduction in ... for third-world countries.",o:["Export earnings","Foreign Aid","Import earnings","Domestic Investment earnings"],c:0,e:"The recession reduced global demand for commodities, cutting export revenues many economies relied on."},
+{p:"Transitioning to renewable energy must be accompanied by policies addressing economic displacement of workers in ... industries.",o:["Agricultural","Fossil Fuel","Textile","Service"],c:1,e:"Moving away from fossil fuels threatens jobs in fossil fuel extraction and processing."},
+{p:"Combining rising living standards and diversification of the economy best describes the ... stage.",o:["Pre-industrial","Take-off","Drive to Maturity","High Mass Consumption"],c:2,e:"'Drive to Maturity' features economic diversification and rising living standards."},
+{p:"A satellite mission needs to predict slingshot manoeuvres around Earth and the Moon. Whose conceptual toolkit is most essential?",o:["Descartes' dualism","Rousseau's general will","Newton's universal gravitation and laws of motion","Voltaire's satire"],c:2,e:"Gravitational slingshot manoeuvres are calculated using Newton's laws of motion and gravitation."},
+{p:"Another term for harmful heat-trapping gases is ...",o:["Global warming gases","Greenhouse gases","Depletion gases","Saturated gases"],c:1,e:"Harmful atmospheric gases that trap heat are commonly called greenhouse gases."},
+{p:"Which is a likely political risk of prolonged dependence on IMF bailouts?",o:["Strengthened domestic policy autonomy","Increased parliamentary oversight","No changes in governance","Perception of reduced sovereignty and domestic policy control"],c:3,e:"Extended reliance on IMF support ties domestic policy to external conditions."},
+{p:"Any process, concept, or practice that enhances human activities through satisfaction of human needs is known as?",o:["Development","Science","Technology","Goals"],c:2,e:"This is the standard definition of technology — practices/tools applied to meet human needs."},
+{p:"Why was Africa's economic structure particularly vulnerable during the 1980s debt crisis?",o:["Heavy dependence on volatile primary commodity exports","Excessive diversification into manufacturing","Dominance of regional trade blocs instead of global markets","Widespread adoption of renewable energy sources"],c:0,e:"Reliance on a narrow range of raw commodity exports made economies exposed to price swings."},
+{p:"Which climate change impact has the most immediate effect on biodiversity loss?",o:["Gradual urban expansion","Destruction of ecosystems","Rising electricity prices","Decreased international trade"],c:1,e:"Direct destruction of ecosystems immediately removes habitats, causing fastest biodiversity loss."},
+{p:"The implementation period of the UN's Sustainable Development Goals is....?",o:["15 years","20 years","30 years","10 years"],c:0,e:"The SDGs run from 2015 to 2030, a 15-year implementation period."},
+{p:"What role do solar variations play in climate change?",o:["They decrease global temperatures","They have no impact on global temperatures","They can lead to higher or lower temperatures depending on the sun's energy output","They primarily increase greenhouse gas emissions"],c:2,e:"Fluctuations in solar output can warm or cool the climate depending on energy output."},
+{p:"Which sector combines both direct GHG emissions and indirect ecosystem destruction?",o:["Solar power generation","Offshore wind farms","Recycling industries","Commercial agriculture involving land clearing"],c:3,e:"Agriculture emits GHGs directly (methane, fertiliser) and indirectly through land clearing."},
+{p:"The short term conditions of the atmosphere is known as...",o:["Climate","Temperature","Weather","Atmospheric condition"],c:2,e:"Weather refers to short-term atmospheric conditions; climate is the long-term pattern."},
+{p:"If glaciers continue melting in Polar Regions, which social effect is most likely?",o:["Reduced volcanic activity in cities","Lower global population growth rates","Stabilization of precipitation patterns in rural areas","Relocation of coastal populations due to sea level rise"],c:3,e:"Melting glaciers raise sea levels, threatening coastal settlements and forcing relocation."},
+{p:"How did the Industrial Revolution impact standards of living?",o:["It uniformly improved standards of living for all","It worsened the living conditions for everyone","It improved standards for some but created harsh conditions for workers","It had no impact on standards of living"],c:2,e:"Wealth and goods increased overall, but factory workers endured poor wages and unsafe conditions."},
+{p:"'Rearing livestock is as much of a climate threat as transport.' Which reasoning supports this?",o:["Livestock absorb CO2 during digestion","Livestock cause solar variation","Transport emits methane from tailpipes","Livestock produce large amounts of methane and nitrous oxide"],c:3,e:"Livestock farming is a major source of methane and nitrous oxide, potent greenhouse gases."},
+{p:"Overfishing threatens local fishing communities. What is the best approach to conserve marine resources?",o:["Implement and enforce sustainable fishing practices","Increase fishing quotas to boost short-term profits","Encourage advanced fishing technology to catch more fish","Ban all fishing activities indefinitely"],c:0,e:"Sustainable fishing balances current livelihoods with long-term conservation of fish stocks."},
+{p:"The Rio+20 conference influenced the post-2015 development agenda primarily by...",o:["Ending the MDGs early","Calling for global goals integrating environmental sustainability with economic/social development","Prioritizing military alliances over development","Limiting the number of global development goals"],c:1,e:"Rio+20 laid groundwork for the SDGs by pushing goals uniting environmental, economic, social sustainability."},
+{p:"Which is an example of a long-term adaptation strategy for climate change effects?",o:["Increasing fossil fuel consumption","Enhancing agricultural practices to cope with changing climate conditions","Continuing current transportation methods without change","Expanding urban areas without considering environmental impact"],c:1,e:"Adapting agricultural methods to withstand changing climate is a proactive, long-term strategy."},
+{p:"The ... is the sequence of actions that a system undergoes.",o:["Process","Output","Feedback","Goal"],c:0,e:"'Process' is the sequence of actions a system carries out to convert input into output."},
+{p:"A nation invests in mass education, builds factories, and promotes exports over a short period. Which Rostow stage is this?",o:["Age of high mass consumption","Take-off","Drive to maturity","Traditional society"],c:1,e:"'Take-off' is characterized by rapid industrialization, rising investment, and expanding exports."},
+{p:"STS aims to integrate personal understanding of the ... environment.",o:["Social, Technological and Natural","Social, Technical and Sustainable","Scientific, Technical and Social","Skills, Technology and Natural"],c:2,e:"STS integrates the scientific, technical, and social dimensions of everyday life."},
+{p:"A city prone to flooding wants to become resilient. What should the government do?",o:["Construct more buildings in flood-prone areas to meet housing demand","Develop green infrastructure such as parks and wetlands to absorb floodwaters","Ignore climate risks and focus on short-term economic growth","Relocate the entire population to a different region"],c:1,e:"Green infrastructure like wetlands and parks naturally absorbs excess water."},
+{p:"Which situation reflects the goal of TECHNOLOGY rather than the goal of science?",o:["Explaining the chemical reactions in battery storage","Predicting weather patterns based on atmospheric data","Designing a low-cost water filtration system for rural communities","Understanding the genetic code of a rare plant species"],c:2,e:"Technology aims to solve practical problems; the other options are explaining/understanding (science)."},
+{p:"A forested area is cleared for agriculture, causing biodiversity loss. Best strategy to restore terrestrial ecosystems?",o:["Allow unrestricted deforestation to boost agricultural production","Focus on short-term economic gains without considering environment","Convert all forest land into urban areas","Implement sustainable land management practices and reforestation programs"],c:3,e:"Sustainable land management and reforestation directly restore ecosystems while balancing development."},
+{p:"Which is the correct word order for STS?",o:["Society, Technology and Science","Science, Technology and Society","Science and Technology, Society","Science and Technology and Society"],c:1,e:"STS stands for Science, Technology and Society, in that order."},
+{p:"The Fourth Industrial Revolution (2000) is characterized by...",o:["Internet and Renewable Energy","Electronics and Nuclear Energy","Coal and Gas Energy","Internet and Gas Energy"],c:0,e:"The Fourth Industrial Revolution is marked by digital connectivity alongside renewable energy."},
+{p:"An engineer wants transportation network design inspired by ancient achievements. Which pairing is most relevant?",o:["Papermaking and gunpowder","Roman roads and Mesopotamian wheel","Aristotle's philosophy and da Vinci's paintings","Maxwell's equations and Sputnik"],c:1,e:"Roman roads and the Mesopotamian wheel are foundational transportation-related innovations."},
+{p:"Which critique of modernization theory is most valid from an STS perspective?",o:["It assumes Western capitalist models are the only valid path to development","It ignores the role of technology entirely","It underestimates the importance of economic growth","It applies only to post-industrial economies"],c:0,e:"A key STS critique is modernization theory's Western-centric bias assuming one capitalist path."},
+{p:"A government builds desalination plants for affordable drinking water in rural areas. Which SDG target?",o:["Increase renewable energy in the global mix","Achieve universal and equitable access to safe and affordable drinking water","Ensure access to safe, affordable housing and drinking water","Reduce inequality among countries with quality drinking water"],c:1,e:"This matches SDG 6's target of universal, equitable access to safe drinking water."},
+{p:"The following are examples of Ancient Civilization EXCEPT......",o:["Egypt","China","Britain","Mesopotamia"],c:2,e:"Egypt, China, and Mesopotamia are classical ancient civilizations; Britain is not typically classified among them."},
+{p:"A rural community lacks reliable electricity. Most sustainable approach for affordable, reliable energy?",o:["Build a large coal-fired power plant","Provide the community with diesel generators","Implement a solar energy project with battery storage","Encourage reliance on traditional biomass"],c:2,e:"Solar with battery storage provides clean, sustainable, reliable power for off-grid settings."},
+{p:"A regional initiative builds high-speed rail between two neighbouring countries, improving trade and commuting. Which SDG target?",o:["Universal access to rail transport","Universal communication system","Increase renewable energy share","Sustainable and resilient trans-border infrastructure"],c:3,e:"Cross-border rail infrastructure boosting trade/connectivity aligns with SDG 9's resilient infrastructure focus."},
+{p:"Which factor is classified as a long-term natural driver of Earth's climate variation?",o:["Expansion of urban road networks","Increased use of synthetic fertilizers","The digestive emissions of ruminants","Cyclical changes in Earth's orbital shape over centuries"],c:3,e:"Long-term orbital cycles (Milankovitch cycles) are a natural, long-term driver of climate variation."},
+{p:"A developing country struggles to meet SDGs due to lack of resources. How can the international community assist?",o:["Impose trade restrictions to encourage self-sufficiency","Reduce the number of SDGs for the country","Require repayment of aid before receiving more assistance","Strengthen global partnerships via financial aid, tech transfer, and capacity building"],c:3,e:"SDG 17 (Partnerships) calls for cooperation through aid, technology transfer, and capacity building."},
+{p:"How do industrial activities intensify climate change?",o:["They increase solar variation","They strengthen Earth's magnetic field","They add to greenhouse gases","They reduce the effects of volcanic ash clouds"],c:2,e:"Industrial processes burn fossil fuels and release greenhouse gases, intensifying the greenhouse effect."},
+{p:"The era 1750–1850 is associated with the transition from what type of economies?",o:["Subsistence economies to market economies","Industrial economies to post-industrial economies","Colonial economies to independent economies","Agrarian economies to industrial economies"],c:3,e:"This period, the Industrial Revolution, marked the shift from agrarian to industrial economies."},
+{p:"A farmer increases nitrogen-based fertilizer use. Which greenhouse gas is most directly associated?",o:["Carbon dioxide (CO2)","Nitrous oxide (N2O)","Methane (CH4)","Ozone (O3)"],c:1,e:"Nitrogen-based fertilizers release nitrous oxide through microbial processes in soil."},
+{p:"Which Washington Consensus policy directly aims to attract foreign companies to a developing country?",o:["Tax reform","Fiscal discipline","Promotion of foreign direct investment","Protection of property rights"],c:2,e:"The Washington Consensus explicitly promotes FDI as a policy to attract foreign companies."},
+{p:"Solar power and wind energy are examples of ...",o:["Nanotechnology","Renewable Energy","Non-renewable Energy","Atmospheric Energy"],c:1,e:"Solar and wind are naturally replenished sources of power — renewable energy."},
+{p:"Decline in agricultural productivity in Ghana due to climate changes could lead to ...",o:["Food security","Food variability","Food insecurity","Food variation"],c:2,e:"Reduced agricultural output directly threatens reliable food availability, leading to food insecurity."},
+{p:"Which BEST describes Structural Adjustment Programmes (SAPs) promoted by IMF/World Bank?",o:["They provided unconditional grants for infrastructure","They required market-oriented reforms in exchange for loans","They were short-term humanitarian relief packages","They focused on increasing tariffs to protect domestic industries"],c:1,e:"SAPs were loan packages conditioned on debtor countries adopting market-oriented economic reforms."},
+{p:"Zoomlion Ghana's mechanism to boost the economy through cleaner cities addresses which SDG?",o:["SDG 11","SDG 7","SDG 6","SDG 3"],c:0,e:"SDG 11 focuses on Sustainable Cities and Communities, including clean urban environments."},
+{p:"Kwabena Musa maintained his industry during the first industrial revolution with the help of .... for power generation.",o:["Electricity","Coal","Steam","Wind"],c:2,e:"The First Industrial Revolution was powered primarily by steam engines, fuelled by coal."},
+{p:"The rise in temperature leading to prolonged dry spells is termed as...",o:["Draught","Desert","Drought","Glaciers"],c:2,e:"A prolonged period of abnormally low rainfall and rising temperatures is defined as a drought."},
+{p:"How did the government support businesses during 1750-1850?",o:["By eliminating taxes on all businesses","By providing subsidies for agricultural activities","By making capital markets available for businesses","By reducing the regulation of financial markets"],c:2,e:"Governments supported growth by facilitating access to capital markets for businesses to raise funds."},
+{p:"One key issue in the global financial system is lack of ... in how credit ratings are assigned to developing countries.",o:["Transparency","Consistency","Fairness","Speed"],c:0,e:"Critics point to a lack of transparency in how credit rating agencies assess developing countries."},
+{p:"Which is a structural cause of Africa's vulnerability to debt distress?",o:["Fall in government annual spending","Temporary fall in tourist arrivals","Dependence on a narrow range of primary commodity exports","Single debt default by a neighbouring country"],c:2,e:"Reliance on a narrow set of raw commodity exports is a deep, structural vulnerability."},
+{p:"The 'Green Ghana' initiative of the government is primarily focused on...",o:["Promoting agriculture in the country","Promoting the use of renewable energy","Promoting afforestation to reduce carbon footprints","Promoting technology in agriculture"],c:2,e:"Green Ghana is a national tree-planting (afforestation) initiative to restore forest cover."},
+{p:"A new urban area is planned. How can planners ensure sustainable water/sanitation management?",o:["Design infrastructure based on current usage without future growth","Invest in advanced water recycling and rainwater harvesting systems","Rely solely on groundwater extraction","Delay infrastructure until population has fully settled"],c:1,e:"Water recycling and rainwater harvesting build long-term resilience into urban water systems."},
+{p:"Critics argue SAPs eroded sovereignty in developing countries. Which best supports this claim?",o:["Voluntary industry codes","Loan access contingent on externally set policy menus and timelines","Peer learning networks","Parliamentary approval of domestic budgets"],c:1,e:"Tying loan access to externally imposed policy conditions is the clearest example of lost sovereignty."},
+{p:"The Millennium Development Goals (MDGs) had........",o:["8 goals","6 goals","12 goals","7 goals"],c:0,e:"The MDGs (2000-2015), predecessors to the SDGs, consisted of 8 goals."},
+{p:"Researchers formulate an explanation for a compound, then run trials. Which step corresponds to 'experiment'?",o:["Developing the explanation","Collecting and analyzing trial results","Noticing patient symptoms","Publishing the results"],c:1,e:"The experiment step involves testing a hypothesis by collecting and analyzing trial data."},
+{p:"A city in 1850 rapidly grows due to establishment of multiple textile mills. Which factor directly contributed?",o:["Decline in agricultural productivity","The rise of political revolutions","The end of global trade routes","Urbanization fuelled by industrial job opportunities"],c:3,e:"New factory jobs drew workers from rural areas into cities, fuelling rapid urban growth."},
+{p:"An old refrigerator emits ………",o:["Methane","Chlorofluorocarbon","Oxygen","Propane"],c:1,e:"Older refrigerators used CFCs (chlorofluorocarbons) as refrigerants, harmful to the ozone layer."},
+{p:"Which unintended consequence of the Second Industrial Revolution most resembles today's Fourth Industrial Revolution challenges?",o:["Invention of the steam engine","Rural isolation","Pollution from industrial growth and energy use","Lack of mass production methods"],c:2,e:"Environmental pollution from rapid industrial/energy growth remains a shared challenge across both eras."},
+{p:"A rural community installs solar-powered water pumps, providing clean water for the first time. This represents...",o:["Cultural progress without economic change","Improvement of basic human needs and quality of life","Increased reliance on fossil fuels","Reduction in technological access"],c:1,e:"Access to clean water is a fundamental human need; providing it improves basic living standards."},
+{p:"Which is an example of how technology has contributed to social change?",o:["Enhancement in communication, education, and entertainment","Decrease in global connectivity","Limitation of access to information","Reduction in literacy rates"],c:0,e:"Technology has expanded communication, education, and entertainment, driving significant social change."},
+{p:"Which modern example is closely related to the transformative effects of electricity in the early 20th century?",o:["Introduction of bicycles in rural villages","Printing of newspapers","Expansion of high-speed internet access in underserved regions","Widespread use of handwritten bookkeeping"],c:2,e:"Just as electricity transformed early 20th century life, expanding internet access transforms regions today."},
+{p:"A country improves education access and gender equality but worsens water scarcity and deforestation. Main issue per SDG framework?",o:["Focus on prosperity alone","Excess emphasis on environmental issues of SDGs","Lack of balanced progress across all three dimensions of SDGs","Overachievement in human rights issues"],c:2,e:"The SDGs require balanced progress across social, economic, and environmental dimensions."},
+{p:"The following are examples of anthropogenic causes of climate change EXCEPT…",o:["Burning of fossil fuel","Deforestation","Landslide","Intensive agriculture"],c:2,e:"A landslide is a natural geological event, not a human-caused (anthropogenic) driver."},
+{p:"Which BEST describes feedback in a technological system?",o:["The raw materials used in the process","The sequence of actions that the system undergoes","The result or product of the system","The information used by the system to monitor and adjust the process to meet its goal"],c:3,e:"Feedback is information the system uses to monitor performance and adjust to stay on target."},
+{p:"Why do critics label neoliberalism as increasing inequality?",o:["It redistributes wealth through progressive taxation","It nationalizes large industries","It imposes strict income caps on the wealthy","It reduces the role of the state in providing social services, benefiting those already advantaged"],c:3,e:"Critics argue shrinking state-provided social services disproportionately hurts the poor."},
+{p:"Which gas is NOT considered a significant greenhouse gas contributing to climate change?",o:["Carbon dioxide (CO2)","Methane (CH4)","Oxygen (O2)","Nitrous oxide (N2O)"],c:2,e:"Oxygen does not trap heat in the atmosphere and is not a greenhouse gas."},
+{p:"What is the primary purpose of the separation of powers in government?",o:["To increase the efficiency of government operations","To ensure different branches of government have distinct and independent powers","To centralize power under a single ruler","To eliminate the need for checks and balances"],c:1,e:"Separation of powers divides government into distinct branches, preventing domination by one branch."},
+{p:"'Economic conditionality' accurately means…",o:["Loans without strings","Military alignment conditions in exchange for financing","Policy reforms required in exchange for financing","Environmental safeguards policy for financing"],c:2,e:"Economic conditionality means lenders require specific policy reforms in return for financing."},
+{p:"Which technological advancements significantly improved transportation during the Industrial Revolution?",o:["Spinning jenny and power loom","Bessemer process and cotton gin","Railways and steamships","Telegraph and telephone"],c:2,e:"Railways and steamships revolutionized the speed and scale of transportation."},
+{p:"In a debt restructuring plan, which element best protects social stability during adjustment?",o:["Removing all capital controls immediately","Freezing wages without safety nets","Linking debt relief to ring-fenced funding for health, education, infrastructure","Switching entirely to cash crops for export"],c:2,e:"Protecting funding for essential services while restructuring debt helps preserve social stability."},
+{p:"If solar output decreases significantly for several decades, what is the most likely effect on Earth's temperature?",o:["It would remain unchanged","It would increase significantly","It would decrease due to reduced solar radiation","It would cause more volcanic eruptions"],c:2,e:"Less solar energy reaching Earth generally leads to a decrease in average global temperatures."},
+{p:"The statement 'STS is not a narrow academic endeavour' means…..",o:["STS encompasses all sectors of both society and academia","STS encompasses all aspects in the academic field","STS encompasses all branches of science","STS encompasses all branches of science and technology"],c:0,e:"STS is interdisciplinary and applies broadly across society, not confined to a narrow academic silo."},
+{p:"A region faces high school dropout rates due to poverty. Best strategy for inclusive, equitable quality education?",o:["Increase school fees to improve quality of education","Provide scholarships, improve facilities, offer flexible learning options","Focus on higher education only, ignore primary education","Limit education to urban areas"],c:1,e:"Scholarships, better facilities, and flexible learning directly reduce dropout barriers."},
+{p:"Why is Goal 6 critical for achieving Goal 8?",o:["Lack of water has no effect on the economy","Water projects relate to productivity","Economic growth only depends on trade","A healthy workforce depends on safe water and sanitation"],c:3,e:"SDG 6 underpins SDG 8 because a healthy, productive workforce needs safe water and sanitation."},
+{p:"Increased concentration of these gases negatively impacts food production and livelihoods. Who are we?",o:["Greanhouse gases","Hazardous gases","Greenhouse gases","Carbonic gases"],c:2,e:"This describes greenhouse gases, which trap heat and disrupt food production and livelihoods."},
+{p:"A coastal city invests in affordable housing while upgrading stormwater drainage for heavy rainfall. Which SDG?",o:["Goal 11","Goal 7","Goal 8","Goal 6"],c:0,e:"SDG 11 (Sustainable Cities) covers affordable housing and resilient urban infrastructure."},
+{p:"Which sector is most responsible for methane/N2O emissions from fertilizers and machinery?",o:["Transportation sector","Industrial sector","Agricultural sector","Energy sector"],c:2,e:"Agriculture is a major source of methane and nitrous oxide via fertilizer use and machinery."},
+{p:"A country faces social unrest due to inequality/lack of access to justice. Best strategy to promote a peaceful, inclusive society?",o:["Strengthen institutions for accountability, justice, and equal opportunities","Increase military presence to control the population","Focus on economic growth","Implement policies favouring the elite"],c:0,e:"Strengthening institutions for accountability/justice addresses root causes of unrest (SDG 16)."},
+{p:"Which is a benefit of intercontinental trade?",o:["Limiting the expansion of business frontiers","International trade avenues to make more money and expand business frontiers","Focusing only on local trade to reduce costs","Government intervention to restrict trade"],c:1,e:"Intercontinental trade opens new markets, allowing businesses to expand revenue opportunities."},
+{p:"How does climate change impact precipitation patterns?",o:["It stabilizes them, leading to predictable weather","It leads to erratic rainfall patterns and extreme weather events","It decreases the frequency of rainfall globally","It increases rainfall uniformly across all regions"],c:1,e:"Climate change disrupts normal weather systems, causing unpredictable rainfall and extremes."},
+{p:"How did the Industrial Revolution affect the cost of goods?",o:["Prices remained the same","Prices increased significantly","Prices decreased due to increased efficiency of production","Prices fluctuated without any pattern"],c:2,e:"Mechanized mass production increased efficiency, lowering per-unit cost of manufactured goods."},
+{p:"Peace is considered essential for sustainable development because…….",o:["It reduces the need for global partnerships","Sustainable development cannot occur in societies beset by conflict and violence","It is only relevant to political stability, not development","Peace is unrelated to prosperity"],c:1,e:"Conflict disrupts institutions, economies, and communities, making sustainable development impossible."},
+{p:"….. is the use of living organisms or organic processes to develop medical products.",o:["Manufacturing technology","Biological technology","Industrial technology","Engineering technology"],c:1,e:"This is the definition of biological technology (biotechnology)."},
+{p:"Which of the following directly resulted from the Industrial Revolution?",o:["Decrease in the production of goods","Increased reliance on handmade products","Higher prices for goods due to lower efficiency","Increased production and efficiency due to machine use"],c:3,e:"Mechanization dramatically raised production output and efficiency."},
+{p:"Which is NOT an effect of climate change?",o:["Rising temperatures leading to prolonged droughts","Decline in agricultural productivity","Increased global food security","Water insecurity"],c:2,e:"Climate change generally undermines food security, rather than improving it."},
+{p:"If a country reduces investment in healthcare/education to prioritize market deregulation, it follows the direction of the ….. consensus.",o:["Watson","Socialism","Neoliberalism","Washington"],c:3,e:"The Washington Consensus promotes deregulation and reduced state spending, often over social investment."},
+{p:"What was significant about the late 18th-early 19th centuries regarding global interaction?",o:["Decreased global trade","Increased global trade","Isolation of countries from each other","Elimination of trade barriers"],c:1,e:"Industrialization drove a major expansion in global trade as production/transport capacities grew."},
+{p:"Which natural event can increase CO2 emissions due to loss of soil carbon sequestration ability?",o:["Volcanic eruptions","Landslides","Solar flares","Ocean currents"],c:1,e:"Landslides strip away soil and vegetation, reducing the land's capacity to store carbon."},
+{p:"Which is a likely unintended consequence of severe measures under neoliberal reforms?",o:["Increased foreign investment in public enterprises","Expansion of free healthcare and education","Reduced access to essential public services, especially for the poor","Stronger social safety nets for vulnerable groups"],c:2,e:"Austerity-style neoliberal reforms often cut public spending, disproportionately hurting the poor."},
+{p:"Which is an example of how technological advancements have impacted healthcare?",o:["Pollution control","Improved communication networks","Increased life expectancy","Creation of new entertainment platforms"],c:2,e:"Medical/technological advances have directly contributed to longer life expectancy worldwide."},
+{p:"Which is an example of how technology has contributed to social change?",o:["Enhancements in communication, education, and entertainment","Decrease in global connectivity","Limitation of access to information","Reduction in literacy rates"],c:0,e:"Technology has broadened access to communication, education, and entertainment."},
+{p:"Which is an example of a long-term adaptation strategy to mitigate climate change effects?",o:["Increasing fossil fuel consumption","Enhancing agricultural practices to cope with changing climate conditions","Continuing current transportation methods without change","Expanding urban areas without considering environmental impact"],c:1,e:"Improving agricultural resilience to shifting climate is a proactive, long-term adaptation measure."},
+{p:"A company automating production would increase efficiency but cause job losses. Most ethical course of action for a manager?",o:["Proceed with automation, as efficiency is the top priority","Introduce automation but also invest in retraining programs for affected workers","Avoid automation to preserve jobs, even with lower efficiency","Automate and outsource the job losses to another country"],c:1,e:"Balancing efficiency with worker retraining supports productivity and decent, inclusive work (SDG 8)."},
+{p:"After Great Britain, which other regions did industrialization spread to?",o:["Asia and Africa","South America and Australia","Belgium, France, Germany, and North America","Scandinavia and Eastern Europe"],c:2,e:"Industrialization spread from Britain to nearby Western European nations and North America."},
+{p:"What is Henry Bessemer known for during the Industrial Revolution?",o:["Inventing the steam engine","Developing the Bessemer process","Creating the water frame","Designing locomotives"],c:1,e:"Henry Bessemer developed the Bessemer process, the first inexpensive method for mass-producing steel."},
+{p:"Which human activities significantly contribute to the rise in greenhouse gas concentration?",o:["Planting more trees","Using solar power","Combustion of fossil fuels","Conservation of wetlands"],c:2,e:"Burning fossil fuels (coal, oil, gas) is the leading human activity driving rising GHG concentrations."},
+{p:"Which greenhouse gas is entirely human-made and not produced by natural processes?",o:["Methane (CH4)","Carbon dioxide (CO2)","Chlorofluorocarbons (CFCs)","Nitrous oxide (N2O)"],c:2,e:"Unlike CO2, methane, and N2O (which have natural sources), CFCs are synthetic, entirely human-made."}
 ];
 
-/* ============================================================
-   STATE
-   ============================================================ */
-let STATE = {
-  screen: "loading",
-  userName: null,
-  activeSlide: null,
-  quizQuestions: [],
-  currentIndex: 0,
-  answers: [],
-  myAttemptsView: null,
-  lastScore: 0
-};
+/* ---------------- STORAGE HELPERS ---------------- */
+const ATTEMPTS_KEY = 'sts-attempts';
+const STATS_KEY = 'sts-qstats';
 
-const PASS_PCT = 0.8;
-
-/* ============================================================
-   STORAGE HELPERS
-   ============================================================ */
-const LS_PREFIX = 'stsQuiz:';
-
-function lsGet(key){
-  try{ return localStorage.getItem(LS_PREFIX + key); }catch(e){ return null; }
+async function loadAttempts(){
+  try{ const r = await window.storage.get(ATTEMPTS_KEY, false); return r ? JSON.parse(r.value) : []; }
+  catch(e){ return []; }
 }
-function lsSet(key, value){
-  try{ localStorage.setItem(LS_PREFIX + key, value); return true; }catch(e){ return false; }
+async function saveAttempts(arr){
+  try{ await window.storage.set(ATTEMPTS_KEY, JSON.stringify(arr), false); }catch(e){}
 }
-function lsDelete(key){
-  try{ localStorage.removeItem(LS_PREFIX + key); }catch(e){}
+async function loadStats(){
+  try{ const r = await window.storage.get(STATS_KEY, false); return r ? JSON.parse(r.value) : {}; }
+  catch(e){ return {}; }
+}
+async function saveStats(obj){
+  try{ await window.storage.set(STATS_KEY, JSON.stringify(obj), false); }catch(e){}
 }
 
-async function getName(){
-  const v = lsGet('quizUserName');
-  return v || null;
-}
-async function setName(name){
-  lsSet('quizUserName', name);
-}
+/* ---------------- APP STATE ---------------- */
+let state = { screen:'loading', attempts:[], stats:{}, quiz:null };
 
-async function getBestScores(){
-  const v = lsGet('myBestScores');
-  try{ return v ? JSON.parse(v) : {}; }catch(e){ return {}; }
-}
-async function setBestScore(slideId, score, total){
-  const scores = await getBestScores();
-  const passedNow = (score / total) >= PASS_PCT;
-  const prev = scores[slideId];
-  const bestScore = prev && prev.score > score ? prev.score : score;
-  const everPassed = (prev && prev.passed) || passedNow;
-  scores[slideId] = { score: bestScore, total, passed: everPassed };
-  lsSet('myBestScores', JSON.stringify(scores));
-  return scores[slideId];
-}
-
-async function getAttempts(slideId){
-  const v = lsGet('attempts:' + slideId);
-  try{ return v ? JSON.parse(v) : []; }catch(e){ return []; }
-}
-async function addAttempt(slideId, score, total){
-  const attempts = await getAttempts(slideId);
-  attempts.push({
-    score, total,
-    pct: Math.round((score/total)*100),
-    passed: (score/total) >= PASS_PCT,
-    ts: Date.now()
-  });
-  lsSet('attempts:' + slideId, JSON.stringify(attempts));
-  return attempts;
-}
-
-async function saveInProgress(slideId, data){
-  lsSet('inProgress:' + slideId, JSON.stringify(data));
-}
-async function getInProgress(slideId){
-  const v = lsGet('inProgress:' + slideId);
-  try{ return v ? JSON.parse(v) : null; }catch(e){ return null; }
-}
-async function clearInProgress(slideId){
-  lsDelete('inProgress:' + slideId);
-}
-
-/* ============================================================
-   HELPERS
-   ============================================================ */
 function shuffle(arr){
   const a = arr.slice();
-  for(let i = a.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i+1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
 
-function shuffleOptions(question){
-  const idxs = shuffle([0,1,2,3]);
-  const options = idxs.map(i => question.options[i]);
-  const correct = idxs.indexOf(question.correct);
-  return { question: question.question, options, correct, explanation: question.explanation };
+function buildQuizSet(mode){
+  let idxs;
+  if(mode==='full'){
+    idxs = BANK.map((_,i)=>i);
+  } else if(mode==='quick'){
+    idxs = shuffle(BANK.map((_,i)=>i)).slice(0,20);
+  } else if(mode==='weak'){
+    const scored = BANK.map((_,i)=>{
+      const s = state.stats[i];
+      const w = (!s || s.seen===0) ? 0.4 : (s.correct/s.seen);
+      return {i,w};
+    });
+    scored.sort((a,b)=>a.w-b.w);
+    idxs = scored.slice(0, Math.min(20, BANK.length)).map(x=>x.i);
+    idxs = shuffle(idxs);
+  }
+  const questions = idxs.map(i=>{
+    const q = BANK[i];
+    const optOrder = shuffle(q.o.map((_,k)=>k));
+    const options = optOrder.map(k=>q.o[k]);
+    const correctIdx = optOrder.indexOf(q.c);
+    return { bankIdx:i, prompt:q.p, options, correctIdx, explanation:q.e };
+  });
+  return { mode, questions, current:0, answers:[], locked:false, selected:null };
 }
 
-function getRealSlides(){
-  return SLIDES.filter(s => s.questions.length > 0);
+async function startQuiz(mode){
+  state.quiz = buildQuizSet(mode);
+  state.screen = 'quiz';
+  render();
 }
 
-/* ============================================================
-   RENDERING
-   ============================================================ */
+function selectOption(optIdx){
+  const q = state.quiz.questions[state.quiz.current];
+  if(state.quiz.locked) return;
+  state.quiz.locked = true;
+  state.quiz.selected = optIdx;
+  const correct = optIdx === q.correctIdx;
+  state.quiz.answers[state.quiz.current] = { selected:optIdx, correct };
+  // update stats
+  const bi = q.bankIdx;
+  if(!state.stats[bi]) state.stats[bi] = {seen:0, correct:0};
+  state.stats[bi].seen++;
+  if(correct) state.stats[bi].correct++;
+  saveStats(state.stats);
+  render();
+}
+
+function nextQuestion(){
+  if(state.quiz.current < state.quiz.questions.length-1){
+    state.quiz.current++;
+    state.quiz.locked = false;
+    state.quiz.selected = null;
+    render();
+  } else {
+    finishQuiz();
+  }
+}
+
+async function finishQuiz(){
+  const total = state.quiz.questions.length;
+  const score = state.quiz.answers.filter(a=>a && a.correct).length;
+  const attempt = { date:new Date().toISOString(), mode:state.quiz.mode, score, total };
+  state.attempts.push(attempt);
+  await saveAttempts(state.attempts);
+  state.screen = 'results';
+  render();
+}
+
+function backToMenu(){
+  state.screen = 'home';
+  state.quiz = null;
+  render();
+}
+
+function retake(){
+  startQuiz(state.quiz.mode);
+}
+
+/* ---------------- RENDER ---------------- */
+function modeLabel(m){
+  return m==='full' ? 'Full Exam (120)' : m==='quick' ? 'Quick Practice (20)' : 'Weak Spots (20)';
+}
+
+function scoreMessage(pct){
+  if(pct>=90) return "Excellent — this material is locked in.";
+  if(pct>=75) return "Solid. A bit more review on the missed ones and you're set.";
+  if(pct>=60) return "Getting there. Review the misses below before your next attempt.";
+  return "Worth another full pass — review each explanation below carefully.";
+}
+
 function render(){
-  const root = document.getElementById('root');
-  const who = document.getElementById('brandWho');
-  
-  if(STATE.screen === "loading"){
-    root.innerHTML = `
-      <div class="eyebrow">Welcome</div>
-      <h1 class="title">STS Exam Prep</h1>
-      <p class="lede">Enter your name to get started with the quiz.</p>
-      <label class="field-label">Your name</label>
-      <input type="text" class="textfield" id="nameInput" placeholder="E.g. Alex">
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="onNameSubmit()">Start</button>
-      </div>
-    `;
-    who.textContent = '';
+  const app = document.getElementById('app');
+  if(state.screen==='loading'){
+    app.innerHTML = '<div class="loading">Loading your practice history…</div>';
+    return;
   }
-  else if(STATE.screen === "menu"){
-    const slides = getRealSlides();
-    const bestScores = lsGet('myBestScores') ? JSON.parse(lsGet('myBestScores')) : {};
-    
-    let grid = '';
-    for(const slide of slides){
-      const best = bestScores[slide.id];
-      const badge = best ? (best.passed ? '✓ Passed' : `${best.score}/${best.total}`) : 'Not attempted';
-      const tagClass = best && best.passed ? 'pass' : 'progress';
-      
-      grid += `
-        <div class="slide-card" onclick="onSelectSlide('${slide.id}')">
-          <div class="card-top">
-            <div class="card-badge">${slide.order}</div>
-            ${best && best.passed ? `<div class="card-best-badge">✓ Passed</div>` : ''}
-          </div>
-          <div class="card-title">${slide.title}</div>
-          <div class="card-sub">${slide.subtitle}</div>
-          <div class="card-tags">
-            <span class="card-tag ${tagClass}">${badge}</span>
-          </div>
-          <div class="card-actions">
-            <button class="btn btn-amber">Start Quiz</button>
-          </div>
+  if(state.screen==='home'){
+    const best = state.attempts.length ? Math.max(...state.attempts.map(a=>Math.round(100*a.score/a.total))) : null;
+    const last = state.attempts.length ? state.attempts[state.attempts.length-1] : null;
+    app.innerHTML = `
+      <div class="brand"><h1>STS Exam Practice</h1><span>UENR 202 · 120-question bank</span></div>
+      <div class="stats-row">
+        <div class="stat"><div class="num">${state.attempts.length}</div><div class="lbl">Attempts</div></div>
+        <div class="stat"><div class="num">${best!==null?best+'%':'—'}</div><div class="lbl">Best score</div></div>
+        <div class="stat"><div class="num">${last?Math.round(100*last.score/last.total)+'%':'—'}</div><div class="lbl">Last score</div></div>
+      </div>
+      <button class="mode-btn" onclick="startQuiz('full')">
+        <div class="tag">120</div>
+        <div class="txt"><strong>Full Exam</strong><span>All 120 questions, shuffled options, exam conditions</span></div>
+      </button>
+      <button class="mode-btn" onclick="startQuiz('quick')">
+        <div class="tag">20</div>
+        <div class="txt"><strong>Quick Practice</strong><span>20 random questions — good for a short session</span></div>
+      </button>
+      <button class="mode-btn" onclick="startQuiz('weak')">
+        <div class="tag">⚡</div>
+        <div class="txt"><strong>Weak Spots</strong><span>Prioritizes questions you've gotten wrong before</span></div>
+      </button>
+      <div class="history">Your progress is saved on this device — come back anytime.</div>
+    `;
+    return;
+  }
+  if(state.screen==='quiz'){
+    const qz = state.quiz;
+    const q = qz.questions[qz.current];
+    const ticks = qz.questions.map((_,i)=>`<div class="tick ${i<qz.current || (i===qz.current && qz.locked) ?'done':''}"></div>`).join('');
+    let optsHtml = q.options.map((opt,i)=>{
+      let cls = 'opt';
+      if(qz.locked){
+        cls += ' locked';
+        if(i===q.correctIdx) cls += ' selected-correct reveal-correct';
+        else if(i===qz.selected) cls += ' selected-incorrect';
+      }
+      return `<button class="${cls}" onclick="selectOption(${i})" ${qz.locked?'disabled':''}>
+        <div class="letter">${String.fromCharCode(65+i)}</div>
+        <div>${opt}</div>
+      </button>`;
+    }).join('');
+    let feedback = '';
+    if(qz.locked){
+      const wasCorrect = qz.answers[qz.current].correct;
+      feedback = `<div class="feedback ${wasCorrect?'good':'bad'}">
+        <b>${wasCorrect?'Correct.':'Not quite.'}</b>${q.explanation}
+      </div>`;
+    }
+    app.innerHTML = `
+      <div class="brand"><h1>STS Exam Practice</h1><span>${modeLabel(qz.mode)}</span></div>
+      <div class="progress-wrap"><span>Question ${qz.current+1} of ${qz.questions.length}</span></div>
+      <div class="ticks">${ticks}</div>
+      <div class="card">
+        <div class="qprompt">${q.prompt}</div>
+        ${optsHtml}
+        ${feedback}
+        <div class="btn-row">
+          <button class="btn ghost" onclick="backToMenu()">Exit</button>
+          <button class="btn" onclick="nextQuestion()" ${qz.locked?'':'disabled'}>${qz.current===qz.questions.length-1?'Finish & Grade':'Next'}</button>
         </div>
-      `;
-    }
-    
-    root.innerHTML = `
-      <div class="welcome-row">
-        <h1 class="title">Choose a lecture</h1>
-        <button class="changer" onclick="onChangeName()">Change name</button>
-      </div>
-      <div class="slide-grid">${grid}</div>
-    `;
-    who.textContent = STATE.userName;
-  }
-  else if(STATE.screen === "quiz"){
-    const slide = SLIDES.find(s => s.id === STATE.activeSlide);
-    const q = STATE.quizQuestions[STATE.currentIndex];
-    const progress = Math.round((STATE.currentIndex / STATE.quizQuestions.length) * 100);
-    
-    let optionsHtml = '';
-    for(let i = 0; i < q.options.length; i++){
-      const selected = STATE.answers[STATE.currentIndex] === i;
-      optionsHtml += `
-        <div class="option ${selected ? 'selected' : ''}" onclick="onSelectOption(${i})">
-          <div class="bubble">${String.fromCharCode(65 + i)}</div>
-          <div class="opt-text">${q.options[i]}</div>
-        </div>
-      `;
-    }
-    
-    root.innerHTML = `
-      <div class="quiz-head">
-        <button class="back" onclick="onBackToMenu()">← Back</button>
-        <div class="progress-wrap"><div class="progress-bar" style="width:${progress}%"></div></div>
-        <div class="qcount">${STATE.currentIndex + 1}/${STATE.quizQuestions.length}</div>
-      </div>
-      <div class="qnum">Question ${STATE.currentIndex + 1}</div>
-      <div class="qtext">${q.question}</div>
-      <div class="options">${optionsHtml}</div>
-      <div class="btn-row">
-        ${STATE.currentIndex > 0 ? `<button class="btn btn-ghost" onclick="onPrevQ()">Previous</button>` : ''}
-        <button class="btn btn-primary" onclick="onNextQ()" style="margin-left:auto;">${STATE.currentIndex === STATE.quizQuestions.length - 1 ? 'Submit' : 'Next'}</button>
       </div>
     `;
-    who.textContent = STATE.userName;
+    return;
   }
-  else if(STATE.screen === "results"){
-    const slide = SLIDES.find(s => s.id === STATE.activeSlide);
-    const pct = Math.round((STATE.lastScore / STATE.quizQuestions.length) * 100);
-    const passed = pct >= 80;
-    
-    let review = '';
-    for(let i = 0; i < STATE.quizQuestions.length; i++){
-      const q = STATE.quizQuestions[i];
-      const ans = STATE.answers[i];
-      const correct = q.correct;
-      const isCorrect = ans === correct;
-      
-      review += `
-        <div class="review-item">
-          <div class="qtext">${q.question}<span class="tag ${isCorrect ? 'ok' : 'no'}">${isCorrect ? '✓' : '✗'}</span></div>
-          <div>Your answer: <strong>${q.options[ans]}</strong></div>
-          ${!isCorrect ? `<div>Correct: <strong>${q.options[correct]}</strong></div>` : ''}
-          <div class="explain">${q.explanation}</div>
-        </div>
-      `;
-    }
-    
-    root.innerHTML = `
-      <div class="score-hero">
-        <div class="score-num">${STATE.lastScore}<span>/${STATE.quizQuestions.length}</span></div>
-        <div class="score-label">${pct}%</div>
-        ${passed ? `<div class="stamp">Passed!</div>` : ''}
+  if(state.screen==='results'){
+    const qz = state.quiz;
+    const total = qz.questions.length;
+    const score = qz.answers.filter(a=>a && a.correct).length;
+    const pct = Math.round(100*score/total);
+    const missed = qz.questions.map((q,i)=>({q,a:qz.answers[i]})).filter(x=>!x.a.correct);
+    let reviewHtml = missed.length ? missed.map(x=>`
+      <div class="review-item">
+        <div class="q">${x.q.prompt}</div>
+        <div class="ans"><span class="you">Your answer: ${x.q.options[x.a.selected]}</span><br><span class="right">Correct: ${x.q.options[x.q.correctIdx]}</span></div>
+        <div class="exp">${x.q.explanation}</div>
       </div>
-      <div class="section-title">Review</div>
-      <div class="review-list">${review}</div>
-      <div class="btn-row" style="margin-top:22px;">
-        <button class="btn btn-ghost" onclick="onRetakeQuiz()">Retake</button>
-        <button class="btn btn-primary" style="margin-left:auto;" onclick="onBackToMenu()">Back to menu</button>
+    `).join('') : '<div class="empty-review">No misses — clean sweep.</div>';
+    app.innerHTML = `
+      <div class="brand"><h1>STS Exam Practice</h1><span>${modeLabel(qz.mode)} — Results</span></div>
+      <div class="card score-hero">
+        <div class="big">${score} / ${total}</div>
+        <div class="pct">${pct}%</div>
+        <div class="score-msg">${scoreMessage(pct)}</div>
       </div>
+      <div class="btn-row" style="justify-content:center;margin-bottom:20px;">
+        <button class="btn ghost" onclick="backToMenu()">Back to menu</button>
+        <button class="btn" onclick="retake()">Retake this mode</button>
+      </div>
+      <div class="card">
+        <div class="section-title">Review (${missed.length} missed)</div>
+        ${reviewHtml}
+      </div>
+      <div class="footer-note">Scores are saved automatically. Come back anytime to practice again.</div>
     `;
-    who.textContent = STATE.userName;
+    return;
   }
 }
 
-/* ============================================================
-   EVENT HANDLERS
-   ============================================================ */
-async function onNameSubmit(){
-  const input = document.getElementById('nameInput');
-  const name = input.value.trim();
-  if(!name) return alert('Please enter your name');
-  STATE.userName = name;
-  await setName(name);
-  STATE.screen = "menu";
+/* ---------------- INIT ---------------- */
+(async function init(){
+  state.attempts = await loadAttempts();
+  state.stats = await loadStats();
+  state.screen = 'home';
   render();
-}
-
-function onChangeName(){
-  STATE.screen = "loading";
-  render();
-}
-
-function onSelectSlide(slideId){
-  STATE.activeSlide = slideId;
-  const slide = SLIDES.find(s => s.id === slideId);
-  STATE.quizQuestions = slide.questions.map(q => shuffleOptions(q));
-  STATE.currentIndex = 0;
-  STATE.answers = new Array(STATE.quizQuestions.length).fill(null);
-  STATE.screen = "quiz";
-  render();
-}
-
-function onSelectOption(idx){
-  STATE.answers[STATE.currentIndex] = idx;
-  render();
-}
-
-function onNextQ(){
-  if(STATE.currentIndex === STATE.quizQuestions.length - 1){
-    onSubmitQuiz();
-  } else {
-    STATE.currentIndex++;
-    render();
-  }
-}
-
-function onPrevQ(){
-  if(STATE.currentIndex > 0){
-    STATE.currentIndex--;
-    render();
-  }
-}
-
-async function onSubmitQuiz(){
-  let score = 0;
-  for(let i = 0; i < STATE.quizQuestions.length; i++){
-    if(STATE.answers[i] === STATE.quizQuestions[i].correct){
-      score++;
-    }
-  }
-  STATE.lastScore = score;
-  await setBestScore(STATE.activeSlide, score, STATE.quizQuestions.length);
-  STATE.screen = "results";
-  render();
-}
-
-function onRetakeQuiz(){
-  const slideId = STATE.activeSlide;
-  const slide = SLIDES.find(s => s.id === slideId);
-  STATE.quizQuestions = slide.questions.map(q => shuffleOptions(q));
-  STATE.currentIndex = 0;
-  STATE.answers = new Array(STATE.quizQuestions.length).fill(null);
-  STATE.screen = "quiz";
-  render();
-}
-
-function onBackToMenu(){
-  STATE.screen = "menu";
-  render();
-}
-
-/* ============================================================
-   INIT
-   ============================================================ */
-async function init(){
-  const name = await getName();
-  if(name){
-    STATE.userName = name;
-    STATE.screen = "menu";
-  } else {
-    STATE.screen = "loading";
-  }
-  render();
-}
-
-init();
+})();
 </script>
 </body>
 </html>
